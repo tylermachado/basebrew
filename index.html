@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>Basebrew Tour Planner : find craft beer near MLB ballparks</title>
+
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" href="//daigofuji.github.io/bbclub-font/css/bbclub-font.css"> 
         <link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet">
@@ -30,9 +34,11 @@
       <div class="breweries"></div>
     </div>
 
+    <p>Please drink mindfully and safely, and enjoy the game.</p>
+
     <div id="footer">
       <p>Built by <a href="//twitter.com/tylermachado">Tyler Machado</a> for Baseball Hack Day 2018.</p>
-      <p>Credits--</p>
+      <p>Powered by: <a href="https://github.com/jsoma/tabletop">Tabletop</a> and <a href="//jquery.org">jQuery</a>.</p>
       <p>Ballpark data: <a href="http://www.seamheads.com/ballparks/">Seamheads.com</a>.</p>
       <p>Brewery data: <a href="http://www.brewerydb.com/">Brewerydb.com</a>.</p>
       <p>Team logos: <a href="http://daigofuji.github.io">Daigo</a>.</p>
@@ -55,7 +61,7 @@
       function showInfo(data) {
         for (i=0; i<data.length; i++) {
           var button = document.createElement("button");
-          button.innerHTML = "<i class=\"bbclub-"+ data[i].teamabbrev +"\"></i> " + data[i].teamcity + " " + data[i].teamname;
+          button.innerHTML = "<i class=\"bbclub-"+ data[i].teamabbrev +"\"></i><span class=\"buttonteamname\"> " + data[i].teamcity + " " + data[i].teamname + "</span>";
           button.setAttribute("data-lat", data[i].lat);
           button.setAttribute("data-long", data[i].long);
           button.setAttribute("data-teamcity", data[i].teamcity);
@@ -87,13 +93,6 @@
 
           });
 
-
-          // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-          // const url = dbquery; // site that doesn’t send Access-Control-*
-          // fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
-          //   .then(response => response.text())
-          //   .then(contents => function())
-          //   .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"));
 
           
         });
