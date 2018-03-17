@@ -1,5 +1,12 @@
 * {
-	font-family:Helvetica,sans-serif
+	font-family:Helvetica,sans-serif;
+	margin:0;
+	padding:0;
+	background-color:#ffffcc;
+}
+
+p {
+	margin-bottom:1rem;
 }
 
 button {
@@ -7,6 +14,16 @@ button {
 	width:20%;
 	height:40px;
 	display:inline-block;
+}
+
+h1 {
+	font-family:"Graduate",sans-serif;
+	text-transform:uppercase;
+	font-weight:bold;
+	font-size:3rem;
+		margin: 0 auto;
+    text-align: center;
+    display: block;
 }
 
 #buttons {
@@ -24,15 +41,35 @@ button {
 }
 
 .park {
-	font-size:1.5rem;
+	font-size:2.2rem;
 	font-weight:bold;
+	font-family:"Graduate",sans-serif;
+	text-transform:uppercase;
 }
 
 .breweries .result {
 	display:inline-block;
 	width:30%;
+	margin-bottom:15px;
 }
 
 .breweries span {
 	display:block;
+}
+
+#output {
+	margin:25px 0;
+	background-color:#fff !important;
+	border:1px black solid;
+}
+
+#footer {
+	width:100%;
+	background-color:darkgrey;
+	margin:0 auto;
+	font-size:0.5rem;
+}
+
+#footer p {
+	margin-bottom:0;
 }

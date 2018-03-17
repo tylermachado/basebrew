@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-        <link rel = "stylesheet" type = "text/css" href = "style.css" />
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="//daigofuji.github.io/bbclub-font/css/bbclub-font.css"> 
+        <link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet">
     </head>
   <body>
 
     <h1>Basebrew Tour Planner</h1>
+
+    <p>Pregame your next baseball outing in style at a local craft brewery. Click a team below to find its nearest craft-brewing neighbors.</p>
 
     <div id="buttons">
       <div id="alwest" class="division"></div>
@@ -20,6 +24,13 @@
       <div class="team"></div>
       <div class="park"></div>
       <div class="breweries"></div>
+    </div>
+
+    <div id="footer">
+      <p>Credits--
+      <p>Ballpark data: <a href="http://www.seamheads.com/ballparks/">Seamheads.com</a>.</p>
+      <p>Brewery data: <a href="http://www.brewerydb.com/">Brewerydb.com</a>.</p>
+      <p>Team logos: <a href="http://daigofuji.github.io">Daigo</a>.</p>
     </div>
 
 
@@ -39,7 +50,7 @@
       function showInfo(data) {
         for (i=0; i<data.length; i++) {
           var button = document.createElement("button");
-          button.innerHTML = data[i].teamcity + " " + data[i].teamname;
+          button.innerHTML = "<i class=\"bbclub-"+ data[i].teamabbrev +"\"></i> " + data[i].teamcity + " " + data[i].teamname;
           button.setAttribute("data-lat", data[i].lat);
           button.setAttribute("data-long", data[i].long);
           button.setAttribute("data-teamcity", data[i].teamcity);
@@ -60,7 +71,7 @@
 
           $.get( dbquery, function( brewdata ) {
               const filtered = brewdata.data.filter(({openToPublic}) => openToPublic === 'Y');
-              for (j=0; j<5; j++) {
+              for (j=0; j<6; j++) {
                 const brewery = filtered[j].brewery.name;
                 const distance = filtered[j].distance;
                 const address = filtered[j].streetAddress + ", " + filtered[j].locality;
