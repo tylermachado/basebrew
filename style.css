@@ -2,28 +2,60 @@
 	font-family:Helvetica,sans-serif;
 	margin:0;
 	padding:0;
-	background-color:#ffffcc;
+	/*background-color:#ffffcc;*/
+}
+
+body {
+	max-width:800px;
+	margin:0 auto;
+}
+
+a {
+	color:black;
+}
+
+a:visited {
+	color:#232323;
+}
+
+a:hover {
+	color:#009933;
+}
+
+header {
+	background-image:url(image.JPG);
+	min-height:400px;
+	background-size:cover;
 }
 
 p {
+	margin-top:1rem;
 	margin-bottom:1rem;
 }
 
 button {
-	border:1px gray solid;
-	width:20%;
+	width:calc(20% - 10px);
 	height:40px;
+	margin:5px;
 	display:inline-block;
+	background:#ccc;
+	cursor:pointer;
+}
+
+button i {
+	font-size: 1.3rem;
+    vertical-align: middle !important;
 }
 
 h1 {
 	font-family:"Graduate",sans-serif;
 	text-transform:uppercase;
-	font-weight:bold;
+	font-weight:900;
 	font-size:3rem;
-		margin: 0 auto;
+	margin: 0 auto;
     text-align: center;
     display: block;
+    color:white;
 }
 
 #buttons {
@@ -37,7 +69,9 @@ h1 {
 }
 
 .team {
-	font-size:1rem;
+	font-size:0.8rem;
+	text-transform:uppercase;
+	font-weight:200;
 }
 
 .park {
@@ -45,12 +79,14 @@ h1 {
 	font-weight:bold;
 	font-family:"Graduate",sans-serif;
 	text-transform:uppercase;
+	margin-bottom:15px;
 }
 
 .breweries .result {
 	display:inline-block;
-	width:30%;
+	width:calc(30% - 10px);
 	margin-bottom:15px;
+	margin-right:10px;
 }
 
 .breweries span {
@@ -60,7 +96,7 @@ h1 {
 #output {
 	margin:25px 0;
 	background-color:#fff !important;
-	border:1px black solid;
+	/*border:1px black solid;*/
 }
 
 #footer {
@@ -72,4 +108,5 @@ h1 {
 
 #footer p {
 	margin-bottom:0;
+	margin-top:0;
 }
