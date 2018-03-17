@@ -1,0 +1,38 @@
+* {
+	font-family:Helvetica,sans-serif
+}
+
+button {
+	border:1px gray solid;
+	width:20%;
+	height:40px;
+	display:inline-block;
+}
+
+#buttons {
+	margin-bottom:10px;
+}
+
+.team, .park {
+	margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.team {
+	font-size:1rem;
+}
+
+.park {
+	font-size:1.5rem;
+	font-weight:bold;
+}
+
+.breweries .result {
+	display:inline-block;
+	width:30%;
+}
+
+.breweries span {
+	display:block;
+}

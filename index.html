@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html>
+  <head>
+        <link rel = "stylesheet" type = "text/css" href = "style.css" />
+    </head>
   <body>
 
     <h1>Basebrew Tour Planner</h1>
 
-    <div id="buttons"></div>
+    <div id="buttons">
+      <div id="alwest" class="division"></div>
+      <div id="alcentral" class="division"></div>
+      <div id="alwest" class="division"></div>
+      <div id="nlwest" class="division"></div>
+      <div id="nlcentral" class="division"></div>
+      <div id="nlwest" class="division"></div>
+    </div>
 
     <div id="output">
       <div class="team"></div>
       <div class="park"></div>
       <div class="breweries"></div>
     </div>
+
 
     <script type="text/javascript" src="tabletop.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -28,7 +39,7 @@
       function showInfo(data) {
         for (i=0; i<data.length; i++) {
           var button = document.createElement("button");
-          button.innerHTML = data[i].teamname;
+          button.innerHTML = data[i].teamcity + " " + data[i].teamname;
           button.setAttribute("data-lat", data[i].lat);
           button.setAttribute("data-long", data[i].long);
           button.setAttribute("data-teamcity", data[i].teamcity);
@@ -38,6 +49,10 @@
         }
 
         $('button').click(function() {
+          $( ".team" ).empty();
+          $( ".park" ).empty();
+          $( ".breweries" ).empty();
+
           var dbquery = "https://cors-anywhere.herokuapp.com/https://api.brewerydb.com/v2/search/geo/point?lat=" + $(this).attr("data-lat") +  "&lng=" + $(this).attr("data-long") +  "&key=83dfc059e930b3682b8854622a4589a4&format=json";
 
           $( ".team" ).append( $(this).attr("data-teamname") );
@@ -47,8 +62,9 @@
               const filtered = brewdata.data.filter(({openToPublic}) => openToPublic === 'Y');
               for (j=0; j<5; j++) {
                 const brewery = filtered[j].brewery.name;
+                const distance = filtered[j].distance;
                 const address = filtered[j].streetAddress + ", " + filtered[j].locality;
-                $( ".breweries" ).append( "<div class=\"result\"><h3>"+brewery+"</h3><span>"+address+"</span></div>" );
+                $( ".breweries" ).append( "<div class=\"result\"><h3>"+brewery+"</h3><span>"+address+"</span><span>"+distance+" miles away</span></div>" );
               }
 
 
