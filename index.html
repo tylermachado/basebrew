@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <body>
+
+    <h1>Basebrew Tour Planner</h1>
+
+    <div id="buttons"></div>
+
+    <div id="output">
+      <div class="team"></div>
+      <div class="park"></div>
+      <div class="breweries"></div>
+    </div>
+
+    <script type="text/javascript" src="tabletop.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var public_spreadsheet_url = 'https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=1Ow6aUkTH4keypGodwSNGGGNny9lkpwimkTcy6DnYsH8&output=html';
+
+      function init() {
+        Tabletop.init( { key: public_spreadsheet_url,
+                         callback: showInfo,
+                         simpleSheet: true } );
+      }
+
+      window.addEventListener('DOMContentLoaded', init)
+
+      function showInfo(data) {
+        for (i=0; i<data.length; i++) {
+          var button = document.createElement("button");
+          button.innerHTML = data[i].teamname;
+          button.setAttribute("data-lat", data[i].lat);
+          button.setAttribute("data-long", data[i].long);
+          button.setAttribute("data-teamcity", data[i].teamcity);
+          button.setAttribute("data-teamname", data[i].teamname);
+          button.setAttribute("data-ballpark", data[i].ballpark);
+          document.getElementById("buttons").appendChild(button);
+        }
+
+        $('button').click(function() {
+          var dbquery = "https://cors-anywhere.herokuapp.com/https://api.brewerydb.com/v2/search/geo/point?lat=" + $(this).attr("data-lat") +  "&lng=" + $(this).attr("data-long") +  "&key=83dfc059e930b3682b8854622a4589a4&format=json";
+
+          $( ".team" ).append( $(this).attr("data-teamname") );
+          $( ".park" ).append( $(this).attr("data-ballpark") );
+
+          $.get( dbquery, function( brewdata ) {
+              const filtered = brewdata.data.filter(({openToPublic}) => openToPublic === 'Y');
+              for (j=0; j<5; j++) {
+                const brewery = filtered[j].brewery.name;
+                const address = filtered[j].streetAddress + ", " + filtered[j].locality;
+                $( ".breweries" ).append( "<div class=\"result\"><h3>"+brewery+"</h3><span>"+address+"</span></div>" );
+              }
+
+
+
+          });
+
+
+          // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+          // const url = dbquery; // site that doesn’t send Access-Control-*
+          // fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+          //   .then(response => response.text())
+          //   .then(contents => function())
+          //   .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"));
+
+          
+        });
+
+        function findplace() {
+            document.getElementById("output").innerHTML = this.innerHTML;
+        }
+      }
+      
+    </script>
+  </body>
+</html>
